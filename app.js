@@ -3,25 +3,40 @@ const app = express()
 const port = 3000;
 const mongoose = require('mongoose')
 
-const linkSchema = new mongoose.Schema({
-    title: String,
-    description: String,
-    url: String,
-    click: Number
+// const linkSchema = new mongoose.Schema({
+//     title: String,
+//     description: String,
+//     url: String,
+//     click: Number
+// })
+
+// const Link = mongoose.model('Link', linkSchema)
+
+// let link = new Link({
+//     title: "progbr",
+//     description: "Link para o twitter",
+//     url: "https://twitter.com/progrbr",
+//     click: 0
+// })
+
+// link.save().then(doc => {
+//     console.log(doc)
+// }).catch(error => console.log(error))
+
+
+
+const personSchema = new mongoose.Schema({ 
+    name: String,
+    age: Number
 })
 
-const Link = mongoose.model('Link', linkSchema)
+const Person = mongoose.model('Person', personSchema);
 
-let link = new Link({
-    title: "progbr",
-    description: "Link para o twitter",
-    url: "https://twitter.com/progrbr",
-    click: 0
-})
+let person = new Person({ name: "José", age: 23 });
 
-link.save().then(doc => {
-    console.log(doc)
-}).catch(error => console.log(error))
+person.save().then( doc => console.log(doc) )
+
+
 
 mongoose.connect('mongodb://localhost/newLinks')
 
