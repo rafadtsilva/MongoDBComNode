@@ -3,7 +3,27 @@ const app = express()
 const port = 3000;
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost/links')
+const linkSchema = new mongoose.Schema({
+    title: String,
+    description: String,
+    url: String,
+    click: Number
+})
+
+const Link = mongoose.model('Link', linkSchema)
+
+let link = new Link({
+    title: "progbr",
+    description: "Link para o twitter",
+    url: "https://twitter.com/progrbr",
+    click: 0
+})
+
+link.save().then(doc => {
+    console.log(doc)
+}).catch(error => console.log(error))
+
+mongoose.connect('mongodb://localhost/newLinks')
 
 let db = mongoose.connection;
 
